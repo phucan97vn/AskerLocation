@@ -41,3 +41,5 @@ lacosta:method-hooks
 tunifight:loggedin-mixin
 underscore@1.0.10
 dburles:two-factor
+meteorhacks:aggregate
+momentjs:moment

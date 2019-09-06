@@ -21,12 +21,15 @@
     "jquery": "^3.4.1",
     "lodash": "^4.17.15",
     "meteor-node-stubs": "^0.4.1",
+    "moment": "^2.24.0",
     "popper.js": "^1.15.0",
     "prop-types": "^15.7.2",
-    "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react": "^16.9.0",
+    "react-dates": "^20.3.0",
+    "react-dom": "^16.9.0",
     "react-router-dom": "^5.0.1",
     "recompose": "^0.30.0",
+    "redux": "^4.0.4",
     "simpl-schema": "^1.5.5"
   },
   "devDependencies": {

@@ -5,10 +5,10 @@ import { NavLink } from 'react-router-dom';
 
 import './Navbar.scss';
 
-const brandStyle={
-  color: '#666'
-}
-//Before Login 
+const brandStyle = {
+  color: '#666',
+};
+//Before Login
 const PublicNav = () => [
   <li key="login" className="nav-item">
     <span className="nav-link">
@@ -41,18 +41,32 @@ const LoggedInNav = () => (
   <>
     {/* <SearchBar key="searchbar" /> */}
     <li className="nav-item">
-    <NavLink>
       <div className="dropdown">
-        <button type="button" className="btn dropdown-toggle" data-toggle="dropdown">
+        <button
+          type="button"
+          className="btn dropdown-toggle"
+          data-toggle="dropdown"
+        >
           Marketing
         </button>
         <div className="dropdown-menu">
-          <a className="dropdown-item" href="#">abc</a>
-          <a className="dropdown-item" href="#">abc</a>
-          <a className="dropdown-item" href="#">abc</a>
+          <NavLink to="/newaskerreport">
+            <button type="button" className="dropdown-item">
+              New Ask Report
+            </button>
+          </NavLink>
+          <NavLink to="/marketing">
+            <button type="button" className="dropdown-item">
+              Marketting
+            </button>
+          </NavLink>
+          <NavLink to="/marketing">
+            <button type="button" className="dropdown-item">
+              Marketting
+            </button>
+          </NavLink>
         </div>
       </div>
-      </NavLink>
     </li>
     <li className="nav-item">
       <div className="dropdown-divider" />
@@ -74,7 +88,6 @@ const LoggedInNav = () => (
         </button>
       </NavLink>
     </li>
-    
   </>
 );
 //User Status
@@ -95,7 +108,6 @@ const Status = ({ loggedIn }) => (
 Status.propTypes = {
   loggedIn: PropTypes.bool.isRequired,
 };
-
 
 //Main Navbar
 const Navbar = ({ loggedIn }) => (

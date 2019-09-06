@@ -7,8 +7,8 @@ import Counters from '../../api/counters/counters.js';
 
 //User auto-logged out after 1 day of inactivity
 Accounts.config({
-  loginExpirationInDays:1
-})
+  loginExpirationInDays: 1,
+});
 
 Accounts.onCreateUser((options, user) => {
   // init counter at 0

@@ -19,6 +19,7 @@ import NotFound from '../pages/Not-Found';
 import RecoverPassword from '../pages/RecoverPassword';
 import ResetPassword from '../pages/ResetPassword';
 import VerifyLogin from '../pages/VerifyLogin';
+import NewAskerReport from '../pages/NewAskerReport';
 // import Spinner
 import Spinner from '../components/Spinner';
 
@@ -33,7 +34,7 @@ const App = props => (
       <Switch>
         <PropsRoute exact path="/" component={Landing} {...props} />
         <PropsRoute path="/login" component={Login} {...props} />
-        <PropsRoute path = "/verify" component={VerifyLogin} {...props}/>
+        <PropsRoute path="/verify" component={VerifyLogin} {...props} />
         <PropsRoute path="/signup" component={Signup} {...props} />
         <PropsRoute exact path="/profile" component={Profile} {...props} />
         <PropsRoute exact path="/profile/:_id" component={Profile} {...props} />
@@ -47,6 +48,7 @@ const App = props => (
           component={ResetPassword}
           {...props}
         />
+        <PropsRoute path="/newaskerreport" component={NewAskerReport} {...props} />
         <PropsRoute component={NotFound} {...props} />
       </Switch>
     </div>

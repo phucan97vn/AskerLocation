@@ -63,12 +63,14 @@ const Modal = ({ target, title, body, counter }) => (
           Meteor.userId():<code> {body}</code>
           <br />
           <br />
-          Meteor.user():<br />{' '}
+          Meteor.user():
+          <br />{' '}
           <code>
             {' '}
             <pre>{JSON.stringify(Meteor.user(), null, 2)}</pre>
           </code>
-          Counter:<br />{' '}
+          Counter:
+          <br />{' '}
           <code>
             {' '}
             <pre>{JSON.stringify(counter, null, 2)}</pre>
