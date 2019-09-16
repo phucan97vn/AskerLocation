@@ -19,18 +19,16 @@ import { Mongo } from 'meteor/mongo';
 import { MongoInternals } from 'meteor/mongo';
 
 export default () => {
-  database = new MongoInternals.RemoteCollectionDriver(
-    'mongodb://0.tcp.ngrok.io:14056/meteor',
+    database = new MongoInternals.RemoteCollectionDriver(
+      'mongodb://0.tcp.ngrok.io:14514/meteor',
     {
-      oplogUrl: 'mongodb://0.tcp.ngrok.io:14056/local',
+      oplogUrl: 'mongodb://0.tcp.ngrok.io:14514/local',
     });
-  
-  AppUser = new Mongo.Collection('users',{ 
-    _driver: database,
-    //Allow 2 collections have same name: users
-    _suppressSameNameError: true });
-};
 
+    AppUser = new Mongo.Collection('users',{_driver: database,_suppressSameNameError: true });//Allow 2 collections have same name: users
+    Task = new Mongo.Collection('task',{_driver:database});
+}
+  
 // example: call a remote server method (use in place of Meteor.call)
 /*
 Remote.call('someMethod', (err) => {

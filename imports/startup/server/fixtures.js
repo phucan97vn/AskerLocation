@@ -13,6 +13,7 @@ Meteor.startup(() => {
 
   //Set MainURL for sending email
   process.env.MAIL_URL = 'smtp://phucanclone97:Phucan0112!@smtp.gmail.com:587/';
+  
   //SEND VERIFICATION CODE TO USER EMAIL
   twoFactor.sendCode = (user, code) => {
     console.log('User code :' + code);

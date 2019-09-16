@@ -12,7 +12,7 @@ export default class NewAskerReport extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterType: "Day",
+      //filterType: "Day",
       startDate: null,
       endDate: null,
       
@@ -22,30 +22,53 @@ export default class NewAskerReport extends React.Component {
       filteredData:{},
             
     }
-    //this.handleOnClick = this.handleOnClick.bind(this);
-    this.handleSelect = this.handleSelect.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
+    // this.handleSelect = this.handleSelect.bind(this);
     this.handleQueryData = this.handleQueryData.bind(this);
   }
 
   //Select Option
-  handleSelect(event){
-    this.setState({
-      filterType: event.target.value
-    })
-  }
-
-  //Get all Users
-  // handleOnClick() {
-  //   //console.log("Here");
-  //   const {endDate,startDate} = this.state;
-  //   Meteor.call('getUser',startDate._d,endDate._d, (e, result) => {
-  //     this.setState({
-  //       askers: result,
-  //     });
-  //     console.log(startDate._d);
-  //   });
+  // handleSelect(event){
+  //   this.setState({
+  //     filterType: event.target.value
+  //   })
   // }
 
+  //Get all Users
+  handleOnClick() {
+    //console.log("Here");
+    const {endDate,startDate} = this.state;
+    Meteor.call('getUser',(e, result) => {
+      this.setState({
+        askers: result,
+      });
+      //console.log(startDate._d);
+      console.log(result);
+    });
+  }
+
+  //Query data
+  handleQueryData(){
+    const { startDate,endDate } = this.state ;
+    //Start of startDate and End of endDate instead of 12:00 of those days.
+    var startDateCal = moment(startDate).startOf('date').toDate();
+    var endDateCal = moment(endDate).endOf('date').toDate();
+    // console.loglog(startDateCal);
+    // console.log(endDateCal)
+
+    //console.log("startDate: "+ startDateCal)
+    //console.log("endDate: "  + endDateCal);
+    Meteor.call('getGroupingDataByDay',startDateCal,endDateCal,(e,result)=>{
+      this.setState({        
+        filteredData:result,
+        isReady: true,
+      })
+
+    //console.log(this.state.filteredData);
+      
+    })
+  }
+   
   renderRow(){
     if(this.state.filteredData === null){
       return null
@@ -69,27 +92,6 @@ export default class NewAskerReport extends React.Component {
       )
     })
   }
-
-  //Query data
-  handleQueryData(){
-    const { startDate,endDate } = this.state ;
-    //Start of startDate and End of endDate instead of 12:00 of those days.
-    var startDateCal = moment(startDate._d).startOf('date').toDate();
-    var endDateCal = moment(endDate._d).endOf('date').toDate();
-
-    //console.log("startDate: "+ startDateCal)
-    //console.log("endDate: "  + endDateCal);
-    Meteor.call('getGroupingDataByDay',startDateCal,endDateCal,(e,result)=>{
-      this.setState({        
-        filteredData:result,
-        isReady: true,
-      })
-
-    //console.log(this.state.filteredData);
-      
-    })
-  }
-   
   //Check if User has login or not?
   //If User hasn't login . User will be push back to login page.
   componentWillMount() {
@@ -106,17 +108,17 @@ export default class NewAskerReport extends React.Component {
     return true;
   };
 
-  componentWillUnmount(){
-    this.setState({
-      isReady:false 
-    })
-  };
+  // componentWillUnmount(){
+  //   this.setState({
+  //     isReady:false 
+  //   })
+  // };
 
   render() {
     // const { askerCounter,_id } = this.state.filteredData;
     // const askerDay = new Date(_id.year,_id.month,_id.day);
     return (
-      <div className="container">
+      <div className="container" style={{textAlign:"center"}}>
         <h1>Thống kê Khách hàng mới</h1>
 
         {/* Filter Dropdown List */}
@@ -144,8 +146,8 @@ export default class NewAskerReport extends React.Component {
         {/* <button type="button" className="btn btn-primary" onClick={this.handleOnClick}>
           ShowData
         </button> */}
-        <button type="button" className="btn btn-primary" onClick={this.handleQueryData}>
-          Show New Asker Report
+        <button type="button" className="btn btn-primary" onClick={this.handleQueryData} style={{marginLeft:20}}>
+          Thống kê
         </button>
         {/* Data Table */}
         <div>

@@ -12,4 +12,5 @@ import '../../api/counters/methods.js';
 import '../../api/counters/publications.js';
 
 // import another api
-import '../../api/remote/methods.js';
+import '../../api/remote/asker-report-methods.js';
+import '../../api/remote/asker-retention-methods';
