@@ -2,25 +2,25 @@ import { Meteor } from 'meteor/meteor';
 import './ddp';
 import { HTTP } from 'meteor/http'
 
-//import { Promise } from 'meteor/promise';
-// const updateAskerLocation = (city,askerId) =>{
-//     AskerLocation.update(
-//             {_id:askerId},
-//             {$set:{city:city}}
-//         );
-// );
+
 
 Meteor.methods({
     getAllAskerLocation(){
-        const allAskerLocation = AskerLocation.find({city:{$exists:false}},{limit:2000}).fetch();
-        // const firstAskerLocation = AskerLocation.find({id:"PMXoFLNM3iXnXuKB8"}).fetch();
-        // return firstAskerLocation;
+        const allAskerLocation = AskerLocation.find({city:{$exists:false},isUpdating:{$exist:false}},{limit:1500}).fetch();
+        allAskerLocation.forEach(e =>{
+            if(e.city == undefined ){
+                AskerLocation.update(
+                    {_id: e._id},
+                    {$set:{isUpdating:true}}
+                )
+            }
+        })
         return allAskerLocation;
     },
 
     getResponseFromOpenCage(data){
         //console.log(data); 
-        var apikey = '';
+        var apikey = 'eee898d5e9c94cb589cccbf2ae61f0f0';
         var api_url= 'https://api.opencagedata.com/geocode/v1/json';
         data.map(e => {
             if(e.city == undefined){                
@@ -36,16 +36,21 @@ Meteor.methods({
                 if(result.data.results[0].components.state !== undefined ){
                     AskerLocation.update(
                         {_id: e._id},
-                        {$set:{city : result.data.results[0].components.state}}
+                        {$set:{city : result.data.results[0].components.state}},
+                        {$unset:{isUpdating:""}}
                     );
                     
                 } else if(result.data.results[0].components.city !== undefined){
                     AskerLocation.update(
                         {_id: e._id},
-                        {$set:{city : result.data.results[0].components.city}}
+                        {$set:{city : result.data.results[0].components.city}},
+                        {$unset:{isUpdating:""}}
                     );
                 } else {
-                    
+                    AskerLocation.update(
+                        {_id: e._id},
+                        {$unset:{isUpdating:""}}
+                    );
                     console.log("SKIP");
                     
                 }
@@ -58,33 +63,11 @@ Meteor.methods({
             }
         })
 
-        // var latitude = lat;
-        // var longitude = lng;
-
-        // var api_url= 'https://api.opencagedata.com/geocode/v1/json';
-        // var request_url = api_url
-        //     + '?'
-        //     + 'key=' + apikey
-        //     + '&q=' + encodeURIComponent(latitude + ',' + longitude)
-        //     + '&pretty=1';
-        // const result = HTTP.get(request_url);
-        // //Update Database
-        // // updateAskerLocation(result.data.results[0].components.state,askerId);
-        // AskerLocation.update(
-        //     {_id:askerId},
-        //     {$set:{city:result.data.results[0].components.state}}
-        // );
-        // console.log("UPDATE SUCCESSFULLY");
-        //Set a sleep time between each call
-        // Meteor._sleepForMs(1000);
-        // return(
-        //     result
-        // )
     },
     checkingLimitation(){
         var lat= 22.3024109026125;
         var lng= 114.169675341075;
-        var apikey = '';
+        var apikey = 'eee898d5e9c94cb589cccbf2ae61f0f0';
         var api_url= 'https://api.opencagedata.com/geocode/v1/json';
         var request_url = api_url
             + '?'
