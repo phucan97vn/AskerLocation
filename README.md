@@ -43,7 +43,7 @@ curl https://install.meteor.com/ | sh
 ### Modify before use the App.
 
   You have to replace the API key in AskerLocation/imports/api/remote/asker-location-methods.js in order to use it.
-  Line 23 and Line 88
+  Line 33 and Line 81
   ```
   var apikey = '***************';
   ```
