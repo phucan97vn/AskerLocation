@@ -7,8 +7,7 @@ export default class AskerLocation extends Component {
         this.state={
             
             data:null,
-
-            askerId:null,
+            
             city: null
         };
 
@@ -19,11 +18,11 @@ export default class AskerLocation extends Component {
 
     onClickHandle(){
         Meteor.call('getAllAskerLocation',(e,result)=>{
-            console.log(result);
+            // console.log(result);
             this.setState({
-                data:result
+                data:result,
             })
-            // console.log(this.state.askerId);
+            console.log(this.state.data);
         })
     }
 
@@ -43,15 +42,7 @@ export default class AskerLocation extends Component {
             console.log(result);
         })
     }
-    // onUpdateAskerLocation(){
-    //     const { city , askerId } = this.state;
-    //     //console.log( city +" " + askerId);
-    //     Meteor.call('updateAskerLocation',city,askerId,(e,result)=>{
-    //         if(!e){
-    //             console.log("UPDATED");
-    //         }
-    //     });
-    // }
+    
 
     render(){
         return(
