@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-Marketing Backend . 
-- New Asker Report - Completed# AskerLocation
-=======
 # Asker Location
   Using OpenCage Geocoder to get Asker Location(State/City) with lat,lng values.
 
