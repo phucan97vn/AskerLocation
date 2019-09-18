@@ -61,4 +61,3 @@ curl https://install.meteor.com/ | sh
    It will run 1 specific API an return the JSON data. You can see your data in console and your remaining time is at  
       ```data.rate.remaining```
    
->>>>>>> bddd971cf2f7f35df98587d4c39d7f163227b121
