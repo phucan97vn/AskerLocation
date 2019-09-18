@@ -19,12 +19,16 @@ import NotFound from '../pages/Not-Found';
 import RecoverPassword from '../pages/RecoverPassword';
 import ResetPassword from '../pages/ResetPassword';
 import VerifyLogin from '../pages/VerifyLogin';
+//import Marketing Pages
 import NewAskerReport from '../pages/NewAskerReport';
+import AskerCategorize from '../pages/AskerCategorize';
+import AskerRetention from '../pages/AskerRetention';
 // import Spinner
 import Spinner from '../components/Spinner';
 
 // import hoc to pass additional props to routes
 import PropsRoute from '../pages/PropsRoute';
+import AskerLocation from '../pages/AskerLocation/AskerLocation';
 
 const App = props => (
   <Router>
@@ -48,7 +52,13 @@ const App = props => (
           component={ResetPassword}
           {...props}
         />
+        
+        <PropsRoute path="/askerlocation" component={AskerLocation} {...props} />
+
+        {/* Marketing */}
         <PropsRoute path="/newaskerreport" component={NewAskerReport} {...props} />
+        <PropsRoute path="/askercategorize" component={AskerCategorize} {...props} />
+        <PropsRoute path="/askerretention" component={AskerRetention} {...props} />
         <PropsRoute component={NotFound} {...props} />
       </Switch>
     </div>

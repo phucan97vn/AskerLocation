@@ -55,14 +55,14 @@ const LoggedInNav = () => (
               New Ask Report
             </button>
           </NavLink>
-          <NavLink to="/marketing">
+          <NavLink to="/askercategorize">
             <button type="button" className="dropdown-item">
-              Marketting
+              Asker Categorize
             </button>
           </NavLink>
-          <NavLink to="/marketing">
+          <NavLink to="/askerretention">
             <button type="button" className="dropdown-item">
-              Marketting
+              Asker Retention
             </button>
           </NavLink>
         </div>
@@ -75,6 +75,16 @@ const LoggedInNav = () => (
       <NavLink to="/profile">
         <button type="button" className="dropdown-item">
           Profile
+        </button>
+      </NavLink>
+    </li>
+    <li className="nav-item">
+      <div className="dropdown-divider" />
+    </li>
+    <li className="nav-item">
+      <NavLink to="/askerlocation">
+        <button type="button" className="dropdown-item">
+          Asker Location
         </button>
       </NavLink>
     </li>

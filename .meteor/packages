@@ -43,3 +43,5 @@ underscore@1.0.10
 dburles:two-factor
 meteorhacks:aggregate
 momentjs:moment
+http
+generalledger:sleepforms

@@ -1,20 +1,15 @@
 import { Meteor } from 'meteor/meteor';
 import './ddp';
   Meteor.methods({
-    getUser(startDate,endDate) {
-      const findUser = database.mongo.find('users',{
-        createdAt:{
-          $gte:startDate,
-          $lte:endDate,
-        }
-      }).fetch();
+    getUser() {
+      const findUser = database.mongo.find('users').fetch();
       //console.log(findUser);
       return findUser;
     },
 
     //Grouping Users with createdAt and firstPostedTask by DAY
     async getGroupingDataByDay(startDate,endDate){
-      console.log("Here");
+      //console.log("Here");
 
       const userGrouped = await AppUser.rawCollection().aggregate([
         {$match:{
