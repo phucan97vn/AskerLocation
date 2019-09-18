@@ -57,11 +57,17 @@ curl https://install.meteor.com/ | sh
 ### Using the App. 
   
    Click the Asker Location button on the Navigation Bar on the top of the UI.
-   Click the "Click Here to see" Button to get the Records. 
-    - Wait until the data is shown on the console of the browser.
-   Click the Send Request and Update.
+   
+   Click the "Click Here to see" button to get the Records. 
+   Wait until the data is shown on the console of the browser.
+   Click the "Send Request and Update" button.
    The system will run through all Records and update the AskLocation database.
+   
    You could check the Amount of times you have left by Clicking the "Check Limitation" Button.
+   
    It will run 1 specific API an return the JSON data. You can see your data in console and your remaining time is at  
-      ```data.rate.remaining```
+   
+      ```
+      data.rate.remaining
+      ```
    
