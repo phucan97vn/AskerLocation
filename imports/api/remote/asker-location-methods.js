@@ -6,7 +6,12 @@ import { HTTP } from 'meteor/http'
 
 Meteor.methods({
     getAllAskerLocation(){
-        const allAskerLocation = AskerLocation.find({city:{$exists:false},isUpdating:{$exist:false}},{limit:1500}).fetch();
+        const allAskerLocation = AskerLocation.find({
+            city:{
+                $exists:false
+            },isUpdating:{
+                $exists:false
+            }},{limit:1500}).fetch();
         allAskerLocation.forEach(e =>{
             if(e.city == undefined ){
                 AskerLocation.update(
