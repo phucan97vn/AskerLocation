@@ -1,6 +1,11 @@
 # Asker Location
   Using OpenCage Geocoder to get Asker Location(State/City) with lat,lng values.
-
+ 
+# NOTE
+  
+  Each IP/Account can only do 2500 times/everyday. Need to use VPN to fake IP .
+  
+  
 # HOW TO SETUP ENVIRONMENT and RUN in your Computer
 
 ## INSTALL Meteorjs
@@ -9,7 +14,6 @@ or if you already have curl , run in Terminal:
 ```
 curl https://install.meteor.com/ | sh
 ```
-
 ## Register
   Signup an new OpenCage account on https://opencagedata.com/users/sign_up.
 
