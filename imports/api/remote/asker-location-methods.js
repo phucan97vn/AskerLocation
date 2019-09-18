@@ -20,7 +20,7 @@ Meteor.methods({
 
     getResponseFromOpenCage(data){
         //console.log(data); 
-        var apikey = 'eee898d5e9c94cb589cccbf2ae61f0f0';
+        var apikey = '';
         var api_url= 'https://api.opencagedata.com/geocode/v1/json';
         data.map(e => {
             if(e.city == undefined){                
@@ -84,7 +84,7 @@ Meteor.methods({
     checkingLimitation(){
         var lat= 22.3024109026125;
         var lng= 114.169675341075;
-        var apikey = 'eee898d5e9c94cb589cccbf2ae61f0f0';
+        var apikey = '';
         var api_url= 'https://api.opencagedata.com/geocode/v1/json';
         var request_url = api_url
             + '?'
