@@ -22,14 +22,14 @@ curl https://install.meteor.com/ | sh
     Example: eee98d5e9c94cb589cccbf2****
 
 ## Clone the Repository 
-  git clone git@github.com:phucanvn2012/AskerLocation.git
+  ```git clone git@github.com:phucanvn2012/AskerLocation.git```
   
 ## Install Packages and Run
-  
+  ```
   cd AskerLocation
   meteor npm install  
   meteor
-  
+  ```
   
 ## Using the App
 
