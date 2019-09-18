@@ -6,11 +6,15 @@ import {
     DateRangePicker,
 } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
-//import { thisExpression } from '@babel/types';
 
-const styleSpace={
-    margin:"20px"
+const tableHeaderStyle={
+    width: '120px',
 };
+
+const rowDataStyle={
+    borderTopStyle: 'solid', 
+    borderWidth: 1
+}
 
 export default class AskerRetention extends Component{
     constructor(props){
@@ -21,6 +25,10 @@ export default class AskerRetention extends Component{
                 startDate : null,
                 endDate : null,
             },
+
+            newUserList:null,
+            oldUserList:null,
+
             newUserCounter:0,
             oldUserCounter:0,
             taskCounter:null,
@@ -28,6 +36,7 @@ export default class AskerRetention extends Component{
             userIsReady:false,
             taskCounterIsReady:false,
             
+            showIds : null,
 
             fullData: null
         };
@@ -59,6 +68,8 @@ export default class AskerRetention extends Component{
         Meteor.call('getAskerStatistic',this.state.date._d,(e,result)=>{
             console.log(result);
             this.setState({
+                newUserList:result.newAskers,
+                oldUserList:result.oldAskers,
                 newUserCounter:result.newAskersCounter,
                 oldUserCounter:result.oldAskersCounter,
                 userIsReady:true
@@ -84,6 +95,12 @@ export default class AskerRetention extends Component{
             }
             //console.log(this.state.taskCounter);
         })
+    }
+
+    onShowIds(ids){
+        if(ids.length > 0){
+            this.setState({ showIds : ids});
+        }
     }
 
     //For testing ONLY
@@ -127,31 +144,42 @@ export default class AskerRetention extends Component{
     //Render Task Count table
     //Consider Vertical and Horizontal Table
     renderTaskCountTable(){
+        let dateData = moment(this.state.date).format("DD/MM/YYYY");
+        const cellWidth = 50;
+        const { newUserCounter, } = this.state;
         return(
-            <div id="tasksCountTable">
-                <table className="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Ngày</th>
-                            <th>KH mới</th>
-                            <th>KH cũ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    {this.state.taskCounter.taskCounterGroupedByDay.groupedData.map((taskCounted,index)=>{
-                        console.log(taskCounted)
-                        let { day , month , year} = taskCounted._id;
-                        let taskDate = moment().date(day).month(month - 1).year(year).format('DD-MM-YYYY');
-                        return(
-                            <tr key={index}>
-                                <td>{taskDate}</td>
-                                <td>{taskCounted.tasksDoneByNewAskerCounter}</td>
-                                <td>{taskCounted.tasksDoneByOldAskerCounter}</td>
-                            </tr>
-                        )
-                    })}
-                    </tbody>
-                </table>
+    
+            /* ----------------------- Render Table Vertically Using Flexbox-----------------------*/
+            <div style={{display:'flex',flexDirection:'row',marginTop: 30, marginBottom:30}}>
+                <div>
+                    <div style={{tableHeaderStyle,fontWeight:'bold'}}>Ngày thống kê</div>
+                    <div style={{tableHeaderStyle,fontWeight:'bold'}}>Khách hàng mới</div>
+                    <div style={{tableHeaderStyle,fontWeight:'bold'}}>Khách hàng cũ</div>
+                </div>
+
+                <div style={{width: 120, borderStyle: 'solid', borderWidth: 1, textAlign: 'center', backgroundColor: 'antiquewhite'}}>
+                        <div style={rowDataStyle}>{dateData}</div>
+                        <div 
+                        style={rowDataStyle} 
+                        onClick={()=>{this.onShowIds()}}>{this.state.newUserCounter}</div>
+                        <div 
+                        style={rowDataStyle} 
+                        onClick={this.onShowIds()}>{this.state.oldUserCounter}</div>
+                </div>
+
+
+                {this.state.taskCounter.taskCounterGroupedByDay.groupedData.map((taskCounted,index)=>{
+                    console.log(taskCounted)
+                    let { day , month } = taskCounted._id;
+                    let taskDate = moment().date(day).month(month - 1).format('DD-MM');
+                    return(
+                        <div key={index} style={{width: cellWidth,borderStyle: 'solid', borderWidth: 1, borderLeft: 'none', textAlign: 'center'}}>
+                            <div style={rowDataStyle}>{taskDate}</div>
+                            <div style={rowDataStyle}>{taskCounted.tasksDoneByNewAskerCounter}</div>
+                            <div style={rowDataStyle}>{taskCounted.tasksDoneByOldAskerCounter}</div>
+                        </div>
+                    )
+                })}
             </div>
         )
     }
@@ -210,6 +238,22 @@ export default class AskerRetention extends Component{
                     this.renderTaskCountTable()
                 }
             </div>
+            {
+                this.state.showIds && this.state.showIds.length > 0 ? 
+                (<div>
+                    <div> Chi tiet cac userId</div>
+                    {
+                        this.state.showIds.map((id,index)=>{
+                            return(
+                                <div>{index + 1}.{id}</div>
+                            )
+                        })
+                    }
+                </div>
+                ): null
+                })
+                
+            }
         </div>   
         )
     }

@@ -73,7 +73,22 @@ const countAllTaskDoneInDay = (newAskerIds,oldAskerIds , startDate, endDate) =>{
                         },1,0]
                     }
                 },
-                askersId:{$push:{askerId:"$askerId"}}
+                newAskersList:{
+                    $push:{
+                        $cond:[
+                            {
+                            $setIsSubset:[["$askerId"],newAskerIds]
+                        },{askerId:"$askerId"},null]
+                    }
+                },
+                oldAskersList:{
+                    $push:{
+                        $cond:[
+                            {
+                            $setIsSubset:[["$askerId"],oldAskerIds]
+                        },{askerId:"$askerId"},null]
+                    }
+                }
             }
         }
         // { $sort : { "_id.day" : 1 } }

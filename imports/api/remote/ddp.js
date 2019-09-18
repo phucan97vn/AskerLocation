@@ -27,6 +27,8 @@ export default () => {
 
     AppUser = new Mongo.Collection('users',{_driver: database,_suppressSameNameError: true });//Allow 2 collections have same name: users
     Task = new Mongo.Collection('task',{_driver:database});
+    //Testing opencagedata api
+    AskerLocation = new Mongo.Collection('AskerLocation',{_driver:database});
 }
   
 // example: call a remote server method (use in place of Meteor.call)

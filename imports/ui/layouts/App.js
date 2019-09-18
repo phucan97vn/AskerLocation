@@ -28,6 +28,7 @@ import Spinner from '../components/Spinner';
 
 // import hoc to pass additional props to routes
 import PropsRoute from '../pages/PropsRoute';
+import AskerLocation from '../pages/AskerLocation/AskerLocation';
 
 const App = props => (
   <Router>
@@ -51,6 +52,9 @@ const App = props => (
           component={ResetPassword}
           {...props}
         />
+        
+        <PropsRoute path="/askerlocation" component={AskerLocation} {...props} />
+
         {/* Marketing */}
         <PropsRoute path="/newaskerreport" component={NewAskerReport} {...props} />
         <PropsRoute path="/askercategorize" component={AskerCategorize} {...props} />
